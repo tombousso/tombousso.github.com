@@ -1,2 +1,1 @@
-categories=photoshop website
-img=portfolio_img_5
+text=no
