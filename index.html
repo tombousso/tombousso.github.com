@@ -12,10 +12,9 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/custom.css">
+        <link rel="stylesheet" href="poshytip-1.2/src/tip-twitter/tip-twitter.css">
         <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Belleza' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" type="text/css" href="tooltipster/css/tooltipster.css">
-        <link rel="stylesheet" type="text/css" href="tooltipster/css/themes/tooltipster-light.css">
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
@@ -40,10 +39,10 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
-        <script type="text/javascript" src="tooltipster/js/jquery.tooltipster.min.js"></script>
+        <script type="text/javascript" src="poshytip-1.2/src/jquery.poshytip.min.js"></script>
         <script>
         $(document).ready(function() {
-        $('.tooltip').tooltipster({ theme: '.tooltipster-light',position:'bottom'});
+        $('.tooltip').each(function(index){$(this).poshytip({className: 'tip-twitter', allowTipHover: false, offsetY: 5, alignTo:'target', alignX: 'center'})});
         });
         </script>
     </body>
