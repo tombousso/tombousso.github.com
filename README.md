@@ -1,2 +1,2 @@
-This site can be viewed at tombousso.me
-=======================================
+View at <a href="tombousso.me">tombousso.me</a>
+====================
