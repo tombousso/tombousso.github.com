@@ -4,7 +4,6 @@
 html,
 body {
   height: 100%;
-  tab-size: 4;
   /* The html and body elements cannot have any padding or margin. */
 }
 
@@ -17,6 +16,8 @@ body {
   margin: 0 auto -60px;
   background-image: url(../../img/texture.png);
   background-repeat:repeat;
+  tab-size: 4;
+  overflow-wrap: break-word;
 }
 
 /* Set the fixed height of the footer here */
