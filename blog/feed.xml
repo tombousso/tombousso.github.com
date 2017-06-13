@@ -6,8 +6,8 @@
     <atom:link href="https://tombousso.github.io/blog/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Tue, 13 Jun 2017 01:14:30 -0700</pubDate>
-    <lastBuildDate>Tue, 13 Jun 2017 01:14:30 -0700</lastBuildDate>
+    <pubDate>Tue, 13 Jun 2017 01:16:29 -0700</pubDate>
+    <lastBuildDate>Tue, 13 Jun 2017 01:16:29 -0700</lastBuildDate>
 
     <item>
       <title>Unexpected JVM Behavior</title>
@@ -54,7 +54,7 @@ Method name:&quot;main&quot; public static Signature: (java.lang.String[])void
 &lt;p&gt;So what happens when we run this classfile? The main method prints &lt;code&gt;1&lt;/code&gt;, as we would expect.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;However&amp;#8230;&amp;#8203; if we change the classfile format major version from 50 (Java 1.6) to 51 (Java 1.7)&amp;#8230;&amp;#8203; then the main method will print &lt;code&gt;0&lt;/code&gt;! The JVM doesn&amp;#8217;t run the &lt;code&gt;&amp;lt;clinit&amp;gt;&lt;/code&gt; method.&lt;/p&gt;
+&lt;p&gt;However&amp;#8230;&amp;#8203; if we change the classfile format major version from 50 (Java 1.6) to 51 (Java 1.7)&amp;#8230;&amp;#8203; then the main method prints &lt;code&gt;0&lt;/code&gt;! The JVM doesn&amp;#8217;t run the &lt;code&gt;&amp;lt;clinit&amp;gt;&lt;/code&gt; method.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;If you look back at the disassembled classfile, you might notice that the &lt;code&gt;&amp;lt;clinit&amp;gt;&lt;/code&gt; method is not static (that is, it doesn&amp;#8217;t have the &lt;code&gt;ACC_STATIC&lt;/code&gt; flag set). Surprisingly, JVM version 1.6 didn&amp;#8217;t care whether or not &lt;code&gt;&amp;lt;clinit&amp;gt;&lt;/code&gt; methods are defined as static. When this issue was reported in 2009, the fix was to disallow non-static &lt;code&gt;&amp;lt;clinit&amp;gt;&lt;/code&gt; methods when the classfile major version is greater than 50 (for backwards compatibility). I ran into this quirk while working on &lt;a href=&quot;https://github.com/tombousso/sJava&quot;&gt;sJava&lt;/a&gt;, but as usual reading the JVM Specification would have saved me some trouble:&lt;/p&gt;

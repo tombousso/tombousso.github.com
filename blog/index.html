@@ -96,7 +96,7 @@ Method name:"main" public static Signature: (java.lang.String[])void
 <p>So what happens when we run this classfile? The main method prints <code>1</code>, as we would expect.</p>
 </div>
 <div class="paragraph">
-<p>However&#8230;&#8203; if we change the classfile format major version from 50 (Java 1.6) to 51 (Java 1.7)&#8230;&#8203; then the main method will print <code>0</code>! The JVM doesn&#8217;t run the <code>&lt;clinit&gt;</code> method.</p>
+<p>However&#8230;&#8203; if we change the classfile format major version from 50 (Java 1.6) to 51 (Java 1.7)&#8230;&#8203; then the main method prints <code>0</code>! The JVM doesn&#8217;t run the <code>&lt;clinit&gt;</code> method.</p>
 </div>
 <div class="paragraph">
 <p>If you look back at the disassembled classfile, you might notice that the <code>&lt;clinit&gt;</code> method is not static (that is, it doesn&#8217;t have the <code>ACC_STATIC</code> flag set). Surprisingly, JVM version 1.6 didn&#8217;t care whether or not <code>&lt;clinit&gt;</code> methods are defined as static. When this issue was reported in 2009, the fix was to disallow non-static <code>&lt;clinit&gt;</code> methods when the classfile major version is greater than 50 (for backwards compatibility). I ran into this quirk while working on <a href="https://github.com/tombousso/sJava">sJava</a>, but as usual reading the JVM Specification would have saved me some trouble:</p>
