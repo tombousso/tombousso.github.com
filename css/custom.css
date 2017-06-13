@@ -1,9 +1,9 @@
 #content {
-font-family: 'Alegreya Sans SC', sans-serif;
-width: 850px ;
+font-family: Georgia, serif;
+width: 810px ;
 margin: 10px auto ;
 border: 1px solid #696;
-padding: 20px 0;
+padding: 20px 0 7px 0;
 text-align: center;
 -webkit-border-radius: 8px;
 -moz-border-radius: 8px;
@@ -20,6 +20,7 @@ background: -o-linear-gradient(#EEFF99, #66EE33);
 background: linear-gradient(#EEFF99, #66EE33);
 }
 #name{
+font-family: 'Alegreya Sans SC', sans-serif;
 font-size:90px;
 line-height:70px;
 margin-bottom:15px;
@@ -34,7 +35,7 @@ font-size: 18px;
 font-family: 'Belleza', sans-serif;
 }
 #social a{
-margin-right: 20px;
+margin-right: 16px;
 }
 body{
   background-image: url(../img/texture.png);

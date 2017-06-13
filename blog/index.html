@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Tom's Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/asciidoctor.css" rel="stylesheet">
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/prettify.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">-->
+    <link rel="shortcut icon" href="favicon.ico">
+  </head>
+  <body onload="prettyPrint()">
+    <div id="wrap">
+   
+	
+	<!-- Fixed navbar -->
+    <div class="navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+                  </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="../">About Me</a></li>
+            <!--<li><a href="feed.xml">Subscribe</a></li>-->
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    <div class="container">
+
+	<div style="text-align:center;"><h1>Tom's Blog</h1></div>
+	<hr style="margin:0">
+
+  			<a href="unexpected-jvm-behavior.html"><h1>Unexpected JVM Behavior</h1></a>
+  			<p>11 June 2017</p>
+  			<p><div class="paragraph">
+<p>Here&#8217;s a disassembled classfile (<code>Test.class</code>):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code>Classfile format major version: 50, minor version: 0.
+Access flags: public super
+Field name: x static Signature: int
+Method name:"&lt;clinit&gt;" Signature: ()void
+  0: iconst_1
+  1: putstatic &lt;Field Test.x int&gt;
+  4: return
+Method name:"main" public static Signature: (java.lang.String[])void
+  0: getstatic &lt;Field java.lang.System.out java.io.PrintStream&gt;
+  3: getstatic &lt;Field Test.x int&gt;
+  6: invokevirtual &lt;Method java.io.PrintStream.println (int)void&gt;
+  9: return</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This classfile <em>roughly</em> corresponds to the following Java code:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-java" data-lang="java">public class Test {
+	static int x;
+	static {
+		x = 1;
+	}
+	public static void main(String[] args) {
+		System.out.println(x);
+	}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>So what happens when we run this classfile? The main method prints <code>1</code>, as we would expect.</p>
+</div>
+<div class="paragraph">
+<p>However&#8230;&#8203; if we change the classfile format major version from 50 (Java 1.6) to 51 (Java 1.7)&#8230;&#8203; then the main method will print <code>0</code>! The JVM doesn&#8217;t run the <code>&lt;clinit&gt;</code> method.</p>
+</div>
+<div class="paragraph">
+<p>If you look back at the disassembled classfile, you might notice that the <code>&lt;clinit&gt;</code> method is not static (that is, it doesn&#8217;t have the <code>ACC_STATIC</code> flag set). Surprisingly, JVM version 1.6 didn&#8217;t care whether or not <code>&lt;clinit&gt;</code> methods are defined as static. When this issue was reported in 2009, the fix was to disallow non-static <code>&lt;clinit&gt;</code> methods when the classfile major version is greater than 50 (for backwards compatibility). I ran into this quirk while working on <a href="https://github.com/tombousso/sJava">sJava</a>, but as usual reading the JVM Specification would have saved me some trouble:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+In a class file whose version number is 51.0 or above, the method [&lt;clinit&gt;] must additionally have its ACC_STATIC flag (§4.6) set in order to be the class or interface initialization method.
+</blockquote>
+<div class="attribution">
+&#8212; <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.9" class="bare">https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.9</a>
+</div>
+</div></p>
+	
+	<hr />
+	
+	<p>Older posts are available in the <a href="archive.html">archive</a>.</p>
+
+		</div>
+		<div id="push"></div>
+    </div>
+    
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">&copy; 2017 | Baked with <a href="http://jbake.org">JBake</a></p>
+      </div>
+    </div>
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/prettify.js"></script>
+    
+  </body>
+</html>
