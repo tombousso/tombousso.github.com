@@ -43,9 +43,6 @@ body {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
-#wrap > .container {
-  padding-top: 60px;
-}
 .container .credit {
   margin: 20px 0;
 }
@@ -59,7 +56,7 @@ h1 {
 }
 
 #wrap > .container {
-  padding-top: 50px;
+  padding-top: 0px;
   padding-left: 35px;
   padding-right: 35px;
   background: white;
