@@ -59,3 +59,15 @@ h1,h2,h3 {
   padding-right: 35px;
   background: white;
 }
+
+.navbar-inverse .navbar-nav>li>a {
+  padding-top: 9px;
+  margin-top: 5px;
+  padding-bottom: 9px;
+  margin-bottom: 5px;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+  background-color: gray;
+  border-radius: 15px;
+}
