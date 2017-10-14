@@ -6,8 +6,8 @@
     <atom:link href="https://tombousso.github.io/blog/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Fri, 13 Oct 2017 20:41:24 -0700</pubDate>
-    <lastBuildDate>Fri, 13 Oct 2017 20:41:24 -0700</lastBuildDate>
+    <pubDate>Fri, 13 Oct 2017 22:16:18 -0700</pubDate>
+    <lastBuildDate>Fri, 13 Oct 2017 22:16:18 -0700</lastBuildDate>
 
     <item>
       <title>Unexpected JVM Behavior</title>
@@ -22,12 +22,12 @@
 &lt;div class=&quot;content&quot;&gt;
 &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;Classfile format major version: 50, minor version: 0.
 Access flags: public super
-Field name: x static Signature: int
+Field name: x Signature: static int
 Method name:&quot;&amp;lt;clinit&amp;gt;&quot; Signature: ()void
   0: iconst_1
   1: putstatic &amp;lt;Field Test.x int&amp;gt;
   4: return
-Method name:&quot;main&quot; public static Signature: (java.lang.String[])void
+Method name:&quot;main&quot; Signature: public static (java.lang.String[])void
   0: getstatic &amp;lt;Field java.lang.System.out java.io.PrintStream&amp;gt;
   3: getstatic &amp;lt;Field Test.x int&amp;gt;
   6: invokevirtual &amp;lt;Method java.io.PrintStream.println (int)void&amp;gt;
