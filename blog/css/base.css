@@ -70,9 +70,11 @@ h1,h2,h3 {
   margin-top: 5px;
   padding-bottom: 9px;
   margin-bottom: 5px;
-  border-radius: 15px;
 }
 
 .navbar-inverse .navbar-nav>li>a:hover {
-  background-color: gray;
+}
+
+.navbar-collapse {
+  font-size: 18px !important;
 }
