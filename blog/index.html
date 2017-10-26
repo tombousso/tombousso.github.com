@@ -76,13 +76,13 @@ class Graph {
 		edges.put(i, new HashSet&lt;&gt;());
 	}
 
-	void addEdge(int a, int b, int w) {
-		edges.get(a).add(new Edge(a, b, w));
+	void addEdge(int src, int dst, int w) {
+		edges.get(src).add(new Edge(src, dst, w));
 	}
 
-	void addUndirectedEdge(int a, int b, int w) {
-		addEdge(a, b, w);
-		addEdge(b, a, w);
+	void addUndirectedEdge(int src, int dst, int w) {
+		addEdge(src, dst, w);
+		addEdge(dst, src, w);
 	}
 
 	Map&lt;Integer, Integer&gt; getDistancesFrom(int iStart) {
@@ -92,22 +92,22 @@ class Graph {
 		pq.addAll(edges.get(iStart));
 		while (!pq.isEmpty()) {
 			Edge e = pq.poll();
-			if (!dists.containsKey(e.b)) {
-				dists.put(e.b, e.dist());
-				pq.addAll(edges.get(e.b));
+			if (!dists.containsKey(e.dst)) {
+				dists.put(e.dst, e.dist());
+				pq.addAll(edges.get(e.dst));
 			}
 		}
 		return new HashMap&lt;&gt;(dists);
 	}
 
 	class Edge implements Comparable&lt;Edge&gt; {
-		int a;
-		int b;
+		int src;
+		int dst;
 		int w;
 
-		public Edge(int a, int b, int w) {
-			this.a = a;
-			this.b = b;
+		public Edge(int src, int dst, int w) {
+			this.src = src;
+			this.dst = dst;
 			this.w = w;
 		}
 
@@ -116,7 +116,7 @@ class Graph {
 		}
 
 		int dist() {
-			return dists.get(a) + w;
+			return dists.get(src) + w;
 		}
 	}
 }</code></pre>
