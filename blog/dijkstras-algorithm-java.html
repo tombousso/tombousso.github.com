@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>Tom's Blog</title>
+    <title>Dijkstra&apos;s Algorithm in Java</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -29,7 +29,7 @@
   <body onload="prettyPrint()">
     <div id="wrap">
    
-
+	
 	<!-- Fixed navbar -->
     <div class="navbar-inverse navbar-default navbar-static-top" role="navigation">
       <div class="container">
@@ -60,19 +60,90 @@
     </div>
     <div class="container">
 	
-	<h1>Blog Archive</h1>
-	
-	<!--<ul>-->
-			<h4>October 2017</h4>
-			<ul>
-		
-		<li>26 - <a href="dijkstras-algorithm-java.html">Dijkstra&apos;s Algorithm in Java</a></li>
-				</ul>
-				<h4>June 2017</h4>
-				<ul>
-		
-		<li>11 - <a href="unexpected-jvm-behavior.html">Unexpected JVM Behavior</a></li>
-	</ul>
+	<h2>Dijkstra&apos;s Algorithm in Java</h2>
+
+	<p>26 October 2017</p>
+
+	<p><div class="paragraph">
+<p>Wrote an implementation of <a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra&#8217;s algorithm</a> in Java using a PriorityQueue. The code is quite simple (only 50 lines).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-java" data-lang="java">import java.util.*;
+class Graph {
+	Map&lt;Integer, Set&lt;Edge&gt;&gt; edges = new HashMap&lt;&gt;();
+	Map&lt;Integer, Integer&gt; dists;
+
+	void addVertex(int i) {
+		edges.put(i, new HashSet&lt;&gt;());
+	}
+
+	void addEdge(int a, int b, int w) {
+		edges.get(a).add(new Edge(a, b, w));
+	}
+
+	void addUndirectedEdge(int a, int b, int w) {
+		addEdge(a, b, w);
+		addEdge(b, a, w);
+	}
+
+	Map&lt;Integer, Integer&gt; getDistancesFrom(int iStart) {
+		dists = new HashMap&lt;&gt;();
+		dists.put(iStart, 0);
+		PriorityQueue&lt;Edge&gt; pq = new PriorityQueue&lt;Edge&gt;();
+		pq.addAll(edges.get(iStart));
+		while (!pq.isEmpty()) {
+			Edge e = pq.poll();
+			if (!dists.containsKey(e.b)) {
+				dists.put(e.b, e.dist());
+				pq.addAll(edges.get(e.b));
+			}
+		}
+		return new HashMap&lt;&gt;(dists);
+	}
+
+	class Edge implements Comparable&lt;Edge&gt; {
+		int a;
+		int b;
+		int w;
+
+		public Edge(int a, int b, int w) {
+			this.a = a;
+			this.b = b;
+			this.w = w;
+		}
+
+		public int compareTo(Edge e) {
+			return Integer.compare(this.dist(), e.dist());
+		}
+
+		int dist() {
+			return dists.get(a) + w;
+		}
+	}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And a simple test case:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-java" data-lang="java">Graph g = new Graph();
+g.addVertex(1);
+g.addVertex(2);
+g.addVertex(3);
+g.addEdge(1, 2, 5);
+g.addEdge(2, 3, 15);
+g.addEdge(1, 3, 21);
+System.out.println(g.getDistancesFrom(1).get(3));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This will print 20, the shortest distance between vertex 1 and vertex 3.</p>
+</div></p>
+
+	<hr />
 	
 		</div>
 		<div id="push"></div>

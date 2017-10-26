@@ -6,9 +6,95 @@
     <atom:link href="https://tombousso.github.io/blog/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Sat, 14 Oct 2017 23:50:56 -0700</pubDate>
-    <lastBuildDate>Sat, 14 Oct 2017 23:50:56 -0700</lastBuildDate>
+    <pubDate>Thu, 26 Oct 2017 15:17:26 -0700</pubDate>
+    <lastBuildDate>Thu, 26 Oct 2017 15:17:26 -0700</lastBuildDate>
 
+    <item>
+      <title>Dijkstra&apos;s Algorithm in Java</title>
+      <link>https://tombousso.github.io/blog/dijkstras-algorithm-java.html</link>
+      <pubDate>Thu, 26 Oct 2017 00:00:00 -0700</pubDate>
+      <guid isPermaLink="false">dijkstras-algorithm-java.html</guid>
+      	<description>
+	&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Wrote an implementation of &lt;a href=&quot;https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm&quot;&gt;Dijkstra&amp;#8217;s algorithm&lt;/a&gt; in Java using a PriorityQueue. The code is quite simple (only 50 lines).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;import java.util.*;
+class Graph {
+	Map&amp;lt;Integer, Set&amp;lt;Edge&amp;gt;&amp;gt; edges = new HashMap&amp;lt;&amp;gt;();
+	Map&amp;lt;Integer, Integer&amp;gt; dists;
+
+	void addVertex(int i) {
+		edges.put(i, new HashSet&amp;lt;&amp;gt;());
+	}
+
+	void addEdge(int a, int b, int w) {
+		edges.get(a).add(new Edge(a, b, w));
+	}
+
+	void addUndirectedEdge(int a, int b, int w) {
+		addEdge(a, b, w);
+		addEdge(b, a, w);
+	}
+
+	Map&amp;lt;Integer, Integer&amp;gt; getDistancesFrom(int iStart) {
+		dists = new HashMap&amp;lt;&amp;gt;();
+		dists.put(iStart, 0);
+		PriorityQueue&amp;lt;Edge&amp;gt; pq = new PriorityQueue&amp;lt;Edge&amp;gt;();
+		pq.addAll(edges.get(iStart));
+		while (!pq.isEmpty()) {
+			Edge e = pq.poll();
+			if (!dists.containsKey(e.b)) {
+				dists.put(e.b, e.dist());
+				pq.addAll(edges.get(e.b));
+			}
+		}
+		return new HashMap&amp;lt;&amp;gt;(dists);
+	}
+
+	class Edge implements Comparable&amp;lt;Edge&amp;gt; {
+		int a;
+		int b;
+		int w;
+
+		public Edge(int a, int b, int w) {
+			this.a = a;
+			this.b = b;
+			this.w = w;
+		}
+
+		public int compareTo(Edge e) {
+			return Integer.compare(this.dist(), e.dist());
+		}
+
+		int dist() {
+			return dists.get(a) + w;
+		}
+	}
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;And a simple test case:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;listingblock&quot;&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;Graph g = new Graph();
+g.addVertex(1);
+g.addVertex(2);
+g.addVertex(3);
+g.addEdge(1, 2, 5);
+g.addEdge(2, 3, 15);
+g.addEdge(1, 3, 21);
+System.out.println(g.getDistancesFrom(1).get(3));&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This will print 20, the shortest distance between vertex 1 and vertex 3.&lt;/p&gt;
+&lt;/div&gt;
+	</description>
+    </item>
     <item>
       <title>Unexpected JVM Behavior</title>
       <link>https://tombousso.github.io/blog/unexpected-jvm-behavior.html</link>
@@ -23,11 +109,11 @@
 &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code&gt;Classfile format major version: 50, minor version: 0.
 Access flags: public super
 Field name: x Signature: static int
-Method name:&quot;&amp;lt;clinit&amp;gt;&quot; Signature: ()void
+Method name: &quot;&amp;lt;clinit&amp;gt;&quot; Signature: ()void
   0: iconst_1
   1: putstatic &amp;lt;Field Test.x int&amp;gt;
   4: return
-Method name:&quot;main&quot; Signature: public static (java.lang.String[])void
+Method name: &quot;main&quot; Signature: public static (java.lang.String[])void
   0: getstatic &amp;lt;Field java.lang.System.out java.io.PrintStream&amp;gt;
   3: getstatic &amp;lt;Field Test.x int&amp;gt;
   6: invokevirtual &amp;lt;Method java.io.PrintStream.println (int)void&amp;gt;
