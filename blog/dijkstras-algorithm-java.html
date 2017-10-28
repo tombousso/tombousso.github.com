@@ -79,8 +79,8 @@
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">import java.util.*;
 class Graph {
-	Map&lt;Integer, Set&lt;Edge&gt;&gt; edges = new HashMap&lt;&gt;();
-	Map&lt;Integer, Integer&gt; dists;
+	Map&lt;Integer, Set&lt;Edge&gt;&gt; edges = new HashMap&lt;&gt;(); //edges from a vertex
+	Map&lt;Integer, Integer&gt; dists; //distance to a vertex
 
 	void addVertex(int i) {
 		edges.put(i, new HashSet&lt;&gt;());
@@ -98,7 +98,7 @@ class Graph {
 	Map&lt;Integer, Integer&gt; getDistancesFrom(int iStart) {
 		dists = new HashMap&lt;&gt;();
 		dists.put(iStart, 0);
-		PriorityQueue&lt;Edge&gt; pq = new PriorityQueue&lt;Edge&gt;();
+		PriorityQueue&lt;Edge&gt; pq = new PriorityQueue&lt;&gt;();
 		pq.addAll(edges.get(iStart));
 		while (!pq.isEmpty()) {
 			Edge e = pq.poll();

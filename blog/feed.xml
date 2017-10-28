@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>JBake</title>
-    <link>https://tombousso.github.io/blog</link>
-    <atom:link href="https://tombousso.github.io/blog/feed.xml" rel="self" type="application/rss+xml" />
+    <link>https://tombousso.com/blog</link>
+    <atom:link href="https://tombousso.com/blog/feed.xml" rel="self" type="application/rss+xml" />
     <description>JBake Bootstrap Template</description>
     <language>en-gb</language>
-    <pubDate>Fri, 27 Oct 2017 09:51:56 -0700</pubDate>
-    <lastBuildDate>Fri, 27 Oct 2017 09:51:56 -0700</lastBuildDate>
+    <pubDate>Sat, 28 Oct 2017 11:59:37 -0700</pubDate>
+    <lastBuildDate>Sat, 28 Oct 2017 11:59:37 -0700</lastBuildDate>
 
     <item>
       <title>Dijkstra&apos;s Algorithm in Java</title>
-      <link>https://tombousso.github.io/blog/dijkstras-algorithm-java.html</link>
+      <link>https://tombousso.com/blog/dijkstras-algorithm-java.html</link>
       <pubDate>Thu, 26 Oct 2017 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">dijkstras-algorithm-java.html</guid>
       	<description>
@@ -22,8 +22,8 @@
 &lt;div class=&quot;content&quot;&gt;
 &lt;pre class=&quot;prettyprint highlight&quot;&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;import java.util.*;
 class Graph {
-	Map&amp;lt;Integer, Set&amp;lt;Edge&amp;gt;&amp;gt; edges = new HashMap&amp;lt;&amp;gt;();
-	Map&amp;lt;Integer, Integer&amp;gt; dists;
+	Map&amp;lt;Integer, Set&amp;lt;Edge&amp;gt;&amp;gt; edges = new HashMap&amp;lt;&amp;gt;(); //edges from a vertex
+	Map&amp;lt;Integer, Integer&amp;gt; dists; //distance to a vertex
 
 	void addVertex(int i) {
 		edges.put(i, new HashSet&amp;lt;&amp;gt;());
@@ -41,7 +41,7 @@ class Graph {
 	Map&amp;lt;Integer, Integer&amp;gt; getDistancesFrom(int iStart) {
 		dists = new HashMap&amp;lt;&amp;gt;();
 		dists.put(iStart, 0);
-		PriorityQueue&amp;lt;Edge&amp;gt; pq = new PriorityQueue&amp;lt;Edge&amp;gt;();
+		PriorityQueue&amp;lt;Edge&amp;gt; pq = new PriorityQueue&amp;lt;&amp;gt;();
 		pq.addAll(edges.get(iStart));
 		while (!pq.isEmpty()) {
 			Edge e = pq.poll();
@@ -97,7 +97,7 @@ System.out.println(g.getDistancesFrom(1).get(3));&lt;/code&gt;&lt;/pre&gt;
     </item>
     <item>
       <title>Unexpected JVM Behavior</title>
-      <link>https://tombousso.github.io/blog/unexpected-jvm-behavior.html</link>
+      <link>https://tombousso.com/blog/unexpected-jvm-behavior.html</link>
       <pubDate>Sun, 11 Jun 2017 00:00:00 -0700</pubDate>
       <guid isPermaLink="false">unexpected-jvm-behavior.html</guid>
       	<description>
