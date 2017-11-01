@@ -70,87 +70,14 @@
 
   			<a href="dijkstras-algorithm-java.html"><h2>Dijkstra&apos;s Algorithm in Java</h2></a>
   			<p>26 October 2017</p>
-  			<p><div class="paragraph">
-<p>Wrote an implementation of <a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra&#8217;s algorithm</a> in Java using a PriorityQueue. The code is quite simple (only 50 lines).</p>
+  			<div class="paragraph">
+<p>Wrote an implementation of <a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm">Dijkstra&#8217;s algorithm</a> in Java using a PriorityQueue. The code is quite simple (only 50 lines):</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-java" data-lang="java">import java.util.*;
-class Graph {
-	Map&lt;Integer, Set&lt;Edge&gt;&gt; edges = new HashMap&lt;&gt;(); //edges from a vertex
-	Map&lt;Integer, Integer&gt; dists; //distance to a vertex
+		<a class="btn btn-default" href="dijkstras-algorithm-java.html">Read More</a>
 
-	void addVertex(int i) {
-		edges.put(i, new HashSet&lt;&gt;());
-	}
-
-	void addEdge(int src, int dst, int w) {
-		edges.get(src).add(new Edge(src, dst, w));
-	}
-
-	void addUndirectedEdge(int src, int dst, int w) {
-		addEdge(src, dst, w);
-		addEdge(dst, src, w);
-	}
-
-	Map&lt;Integer, Integer&gt; getDistancesFrom(int iStart) {
-		dists = new HashMap&lt;&gt;();
-		dists.put(iStart, 0);
-		PriorityQueue&lt;Edge&gt; pq = new PriorityQueue&lt;&gt;();
-		pq.addAll(edges.get(iStart));
-		while (!pq.isEmpty()) {
-			Edge e = pq.poll();
-			if (!dists.containsKey(e.dst)) {
-				dists.put(e.dst, e.dist());
-				pq.addAll(edges.get(e.dst));
-			}
-		}
-		return new HashMap&lt;&gt;(dists);
-	}
-
-	class Edge implements Comparable&lt;Edge&gt; {
-		int src;
-		int dst;
-		int w;
-
-		public Edge(int src, int dst, int w) {
-			this.src = src;
-			this.dst = dst;
-			this.w = w;
-		}
-
-		public int compareTo(Edge e) {
-			return Integer.compare(this.dist(), e.dist());
-		}
-
-		int dist() {
-			return dists.get(src) + w;
-		}
-	}
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>And a simple test case:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-java" data-lang="java">Graph g = new Graph();
-g.addVertex(1);
-g.addVertex(2);
-g.addVertex(3);
-g.addEdge(1, 2, 5);
-g.addEdge(2, 3, 15);
-g.addEdge(1, 3, 21);
-System.out.println(g.getDistancesFrom(1).get(3));</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This will print 20, the shortest distance between vertex 1 and vertex 3.</p>
-</div></p>
   			<a href="unexpected-jvm-behavior.html"><h2>Unexpected JVM Behavior</h2></a>
   			<p>11 June 2017</p>
-  			<p><div class="paragraph">
+  			<div class="paragraph">
 <p>Here&#8217;s a disassembled classfile (<code>Test.class</code>):</p>
 </div>
 <div class="listingblock">
@@ -201,7 +128,7 @@ In a class file whose version number is 51.0 or above, the method [&lt;clinit&gt
 <div class="attribution">
 &#8212; <a href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.9" class="bare">https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.9</a>
 </div>
-</div></p>
+</div>
 	
 	<hr />
 	
