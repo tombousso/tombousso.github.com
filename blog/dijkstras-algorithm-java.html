@@ -110,7 +110,7 @@ class Graph {
 				pq.addAll(edges.get(e.dst));
 			}
 		}
-		return new HashMap&lt;&gt;(dists);
+		return dists;
 	}
 
 	class Edge implements Comparable&lt;Edge&gt; {
@@ -134,6 +134,9 @@ class Graph {
 	}
 }</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>This code is O(|E| log |E|) because it stores edges in the heap rather than vertices.</p>
 </div>
 <div class="paragraph">
 <p>And a simple test case:</p>
