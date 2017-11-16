@@ -82,8 +82,8 @@
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-java" data-lang="java">import java.util.*;
 class Graph {
-	Map&lt;Integer, Set&lt;Edge&gt;&gt; edges = new HashMap&lt;&gt;(); //edges from a vertex
-	Map&lt;Integer, Integer&gt; dists; //distance to a vertex
+	Map&lt;Integer, Set&lt;Edge&gt;&gt; edges = new HashMap&lt;&gt;(); // node to edges
+	Map&lt;Integer, Integer&gt; dists; // node to distance
 
 	void addVertex(int i) {
 		edges.put(i, new HashSet&lt;&gt;());
